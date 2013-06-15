@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+<f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Cadastrar categoria</title>
+            </f:facet>
+</h:head> 
+
+<ui:include src="index.xhtml"></ui:include>
+
+<h:body>
+  <h:form> 
+		<p:panel id="panel" header="Cadastrar categoria" style="margin-bottom:10px; align: center;"> 
+                <h:form>
+                 <br></br>
+                 Nome da categoria <br/> <p:inputText id="nome" size="45" value="#{MBCategoria.beanCategoria.nome}"/><br></br><br></br>
+                   <br/>
+                 <p:commandButton  value="Cadastrar" action="#{MBCategoria.inserir()}"/>
+                 <p:commandButton value="Cancelar" action="categoria"/><br></br>
+                </h:form>
+         </p:panel>		 
+	</h:form>
+</h:body> 
+</html>

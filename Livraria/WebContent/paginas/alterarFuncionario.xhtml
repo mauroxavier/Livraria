@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+	<h:head></h:head>
+
+	<ui:include src="index.xhtml"></ui:include>
+ 
+	<h:body>
+	  <h:form> 
+		<p:panel id="panel" header="Alterar funcionário" style="margin-bottom:10px; align: center;">
+				<h:form>
+                 <br></br>
+                 Nome do funcionário <br/> <p:inputText id="nome" size="45" value="#{MBFuncionario.beanFuncionario.nome}"/><br></br><br></br>
+                 Login <br/> <p:inputText id="login" size="15" value="#{MBFuncionario.beanFuncionario.login}"/><br/><br></br>
+                 Senha <br/> <p:inputText id="senha" size="15" value="#{MBFuncionario.beanFuncionario.senha}"/><br/><br/><br></br>
+                 <p:commandButton id="cadastrar" value="Alterar" action="#{MBFuncionario.alterarFuncionario()}"/>
+                 <p:commandButton id="cancelar" value="Cancelar" action="funcionario"/><br></br>
+                 </h:form>
+		</p:panel>
+	  </h:form> 
+	</h:body>
+</html>

@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Editoras</title>
+            </f:facet>
+        </h:head>
+
+		<ui:include src="index.xhtml"></ui:include>
+
+        <h:body>
+                <p:layoutUnit position="all">
+                <h:form>
+                
+                <p:dataTable id="dataTable" var="editora" value="#{MBEditora.consultarEditora}" paginator="true"  rows="6">
+        		<f:facet name="header">  
+            		Editoras  
+        		</f:facet>  				
+        		<p:column style="width: 50;" headerText="Código">
+                	<h:outputText value="#{editora.id}" />
+        		</p:column>
+        		<p:column  headerText="Nome da Editora" >
+                	<h:outputText value="#{editora.nome}" />
+        		</p:column>
+        		<p:column style="width: 5;" headerText="Operações">
+        			<p:commandButton value="Alterar" action="#{MBEditora.prepararAlterar()}"/>
+        			<p:column>
+                 	<p:commandButton value="Excluir" update="dataTable" onclick="#{MBEditora.returnError(editora.id)}" action="#{MBEditora.excluir()}" />
+                 </p:column>
+                </p:column>
+        		</p:dataTable><br/>
+                 <p:commandButton id="novo" value="Nova Editora" update="dataTable" action="#{MBEditora.prepararAdd()}"/>
+                 <p:commandButton id="voltar" value="Voltar" action="index" />
+
+    					<p:growl id="messages" sticky="true" showDetail="true"/>  
+       					<p:confirmDialog id="confirmDialog" message="Um livro está utilizando esta editora. Não é possível removê-la."  
+       									widgetVar="message" header="Erro" width="425"  severity="alert"
+        								resizable="false" showEffect="clip" hideEffect="clip">  
+		    			</p:confirmDialog>
+                 
+                </h:form>
+                </p:layoutUnit>
+        </h:body>
+
+    </f:view>
+</html>

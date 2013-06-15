@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+<f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Cadastrar cliente</title>
+            </f:facet>
+</h:head> 
+
+<ui:include src="index.xhtml"></ui:include>
+
+<h:body>
+  <h:form> 
+		<p:panel id="panel" header="Cadastrar cliente" style="margin-bottom:10px; align: center;"> 
+                <h:form>
+                 <br></br>
+                 Nome do cliente <br/> <p:inputText id="nome" size="45" value="#{MBCliente.beanCliente.nome}"/><br></br><br></br>
+                 Logradouro <br/> <p:inputText id="logradouro" size="60" value="#{MBCliente.beanCliente.logradouro}"/>  <br/><br></br>
+                 Número<br/> <p:inputText id="numero" size="6" value="#{MBCliente.beanCliente.numero}"/>  <br/><br></br>
+                 Cidade<br/> <p:inputText id="cidade" size="50" value="#{MBCliente.beanCliente.cidade}"/>  <br/><br></br>
+                 Estado<br/> <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"><br></br> 
+                 	
+        <p:selectOneMenu value="#{MBCliente.beanCliente.estado}">  
+            <f:selectItem itemLabel="AC" itemValue="Acre" />  
+            <f:selectItem itemLabel="AL" itemValue="Alagoas" />  
+            <f:selectItem itemLabel="AP" itemValue="Amapá" /> 
+            <f:selectItem itemLabel="AM" itemValue="Amazonas" /> 
+            <f:selectItem itemLabel="BA" itemValue="Bahia" />  
+            <f:selectItem itemLabel="CE" itemValue="Ceará" /> 
+            <f:selectItem itemLabel="DF" itemValue="Distrito Federal" />
+            <f:selectItem itemLabel="ES" itemValue="Espirito Santo" />  
+            <f:selectItem itemLabel="GO" itemValue="Goias" />  
+            <f:selectItem itemLabel="MA" itemValue="ma" /> 
+            <f:selectItem itemLabel="MT" itemValue="mt" />
+            <f:selectItem itemLabel="MS" itemValue="ms" />
+            <f:selectItem itemLabel="MG" itemValue="Minas Gerais" />  
+            <f:selectItem itemLabel="PA" itemValue="pa" /> 
+            <f:selectItem itemLabel="PB" itemValue="Paraíba" /> 
+            <f:selectItem itemLabel="PR" itemValue="pr" />
+            <f:selectItem itemLabel="PE" itemValue="pe" />
+            <f:selectItem itemLabel="PI" itemValue="Piauí" />
+            <f:selectItem itemLabel="RJ" itemValue="Rio de Janeiro" />
+            <f:selectItem itemLabel="RN" itemValue="Rio Grande do Norte" />
+            <f:selectItem itemLabel="RS" itemValue="Rio Grande do Sul" />
+            <f:selectItem itemLabel="RO" itemValue="Rondônia" /> 
+            <f:selectItem itemLabel="RR" itemValue="rr" />
+            <f:selectItem itemLabel="SC" itemValue="Santa Catarina" />   
+            <f:selectItem itemLabel="SP" itemValue="São Paulo" />
+            <f:selectItem itemLabel="SE" itemValue="se" /> 
+            <f:selectItem itemLabel="TO" itemValue="Tocantins" />	        </p:selectOneMenu>
+        </h:panelGrid>        
+                 <p:commandButton  value="Cadastrar" action="#{MBCliente.inserir()}"/>
+                 <p:commandButton value="Cancelar" action="cliente"/><br></br>
+                </h:form>
+            </p:panel>
+		 
+	</h:form>
+</h:body> 
+</html>

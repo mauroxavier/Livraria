@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+      
+<f:view contentType="text/html">
+<h:head>
+	<script>  
+            function mascara(o, f) {  
+              v_obj = o;  
+              v_fun = f;  
+              setTimeout("execmascara()", 1);  
+            }  
+  
+            function execmascara() {  
+              v_obj.value = v_fun(v_obj.value);  
+            }  
+  
+	        function valor(v) {  
+		        v = v.replace(/\D/g, "");  
+	        	v = v.replace(/[0-9]{15}/, "inválido");  
+	        	v = v.replace(/(\d{1})(\d{11})$/, "$1.$2"); // coloca ponto antes dos últimos 11 digitos  
+	        	v = v.replace(/(\d{1})(\d{8})$/, "$1.$2"); // coloca ponto antes dos últimos 8 digitos  
+	        	v = v.replace(/(\d{1})(\d{5})$/, "$1.$2"); // coloca ponto antes dos últimos 5 digitos  
+	        	v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2"); // coloca virgula antes dos últimos 2 digitos 
+	        return v;  
+			}   
+	</script> 
+	<f:facet name="first">
+		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+		<title>Alterar livro</title>
+	</f:facet>                      
+</h:head> 
+
+        <h:body>
+
+		<ui:include src="index.xhtml"></ui:include>
+
+                <p:layoutUnit position="all">
+			
+                <h:form>
+                <p:dataTable id="dataTable" var="livro" value="#{MBLivro.consultarLivro}" paginator="true"  rows="6">
+        		<f:facet name="header">  
+            		Livros  
+        		</f:facet>  				
+        		<p:column style="width: 50;" headerText="Código">
+                	<h:outputText value="#{livro.id}" />
+        		</p:column>
+        		<p:column  headerText="Nome do livro" >
+                	<h:outputText value="#{livro.descricao}" />
+        		</p:column>
+        		<p:column style="width: 50;" headerText="Preço">
+                	<h:outputText value="#{livro.preco}">
+                		<f:convertNumber type="currency" value="mascara(this, valor);"/>
+                	</h:outputText>
+        		</p:column>
+        		<p:column style="width: 99%;" headerText="Autor">
+                    <h:outputText value="#{livro.getAutorString()}"/>
+        		</p:column>
+        		<p:column style="width: 150;" headerText="Categoria">
+                    <h:outputText value="#{livro.getCategoriaString()}"/>
+        		</p:column>
+        		<p:column style="width: 150;" headerText="Editora">
+                    <h:outputText value="#{livro.getEditoraString()}"/>
+        		</p:column>
+        		<p:column style="width: 10;" headerText="Operações">
+        			<p:commandButton value="Alterar" action="#{MBLivro.prepararAlterar()}"/>
+        			<p:column>
+                 	<p:commandButton value="Excluir" update="dataTable" action="#{MBLivro.excluir()}" onclick="showMessage"/>
+					</p:column>
+        		</p:column>
+        		</p:dataTable><br/>
+                 <p:commandButton id="novo" value="Novo Livro" update="dataTable" action="#{MBLivro.prepararAdd()}"/>
+                 <p:commandButton id="voltar" value="Voltar" action="index" />
+              
+                </h:form>
+                </p:layoutUnit>
+        </h:body>
+    </f:view>
+</html>

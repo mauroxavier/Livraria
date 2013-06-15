@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Autores</title>
+            </f:facet>
+        </h:head>
+
+		<ui:include src="index.xhtml"></ui:include>
+
+        <h:body>
+
+                <p:layoutUnit position="all">
+                <h:form>
+                
+                <p:dataTable id="dataTable" var="autor" value="#{MBAutor.consultarAutor}" paginator="true"  rows="6">
+        		<f:facet name="header">  
+            		Autores  
+        		</f:facet>  				
+                
+        		<p:column style="width: 50;" headerText="Código">
+                	<h:outputText value="#{autor.id}" />
+        		</p:column>
+        		<p:column  headerText="Nome do autor" >
+                	<h:outputText value="#{autor.nome}" />
+        		</p:column>
+        		<p:column style="width: 10%;" headerText="Descrição">
+                	<h:outputText value="#{autor.descricao}" />
+        		</p:column>
+        		<p:column style="width: 5;" headerText="Operações">
+        			<p:commandButton value="Alterar" action="#{MBAutor.prepararAlterar()}"/>
+        			<p:column>
+                 	<p:commandButton value="Excluir" update="dataTable" action="#{MBAutor.excluir()}"/>
+                 </p:column>
+        		</p:column>
+        		</p:dataTable><br/>
+                 <p:commandButton id="novo" value="Novo Autor" update="dataTable" action="#{MBAutor.prepararAdd()}"/>
+                 <p:commandButton id="voltar" value="Voltar" action="index" />
+                 
+                </h:form>
+                </p:layoutUnit>
+
+            
+
+        </h:body>
+
+    </f:view>
+</html>

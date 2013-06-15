@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<script>  
+            function mascara(o, f) {  
+              v_obj = o;  
+              v_fun = f;  
+              setTimeout("execmascara()", 1);  
+            }  
+  
+            function execmascara() {  
+              v_obj.value = v_fun(v_obj.value);  
+            }  
+  
+	        function valor(v) {  
+		        v = v.replace(/\D/g, "");  
+	        	v = v.replace(/[0-9]{15}/, "inválido");  
+	        	v = v.replace(/(\d{1})(\d{11})$/, "$1$2"); // coloca ponto antes dos últimos 11 digitos  
+	        	v = v.replace(/(\d{1})(\d{8})$/, "$1$2"); // coloca ponto antes dos últimos 8 digitos  
+	        	v = v.replace(/(\d{1})(\d{5})$/, "$1$2"); // coloca ponto antes dos últimos 5 digitos  
+	        	v = v.replace(/(\d{1})(\d{1,2})$/, "$1.$2"); // coloca virgula antes dos últimos 2 digitos 
+	        return v;  
+			}   
+	</script> 
+	<f:facet name="first">
+		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+		<title>Alterar livro</title>
+	</f:facet>                      
+</h:head> 
+
+<ui:include src="index.xhtml"></ui:include>
+
+<h:body>
+  <h:form> 
+	<p:panel id="panel" header="Cadastrar livro" style="margin-bottom:10px; align: center;">
+                <h:form>
+                 <br></br>
+                 Nome <br/> <p:inputText id="descricao" size="45" value="#{MBLivro.beanLivro.descricao}"/><br></br><br></br>
+                 Preço <br/> <p:inputText id="preco" size="15" value="#{MBLivro.beanLivro.preco}"
+                 						  maxlength="11" required="true" requiredMessage="Informe o Preço unitário"
+                 						  onkeypress="mascara(this, valor);"/><br/><br></br>
+    			 Autor<br/> <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="0"><br></br> 
+		         <p:selectOneMenu value="#{MBLivro.beanLivro.autor}"> 
+		         <f:selectItems value="#{MBAutor.getAutores()}" var="autor" itemLabel="#{autor.nome}" itemValue="#{autor.id}" />
+		         </p:selectOneMenu> </h:panelGrid><br></br>                    
+
+    			 Categoria<br/> <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="0"><br></br> 
+		         <p:selectOneMenu value="#{MBLivro.beanLivro.categoria}"> 
+		         <f:selectItems value="#{MBCategoria.getCategorias()}" var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria.id}" />
+		         </p:selectOneMenu> </h:panelGrid><br></br>                    
+
+     			 Editora<br/> <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="0"><br></br> 
+		         <p:selectOneMenu value="#{MBLivro.beanLivro.editora}"> 
+		         <f:selectItems value="#{MBEditora.getEditoras()}" var="editora" itemLabel="#{editora.nome}" itemValue="#{editora.id}" />
+		         </p:selectOneMenu> </h:panelGrid><br></br>                    
+
+                 <p:commandButton id="cadastrar" value="Cadastrar" action="#{MBLivro.inserir()}"/>
+                 <p:commandButton id="cancelar" value="Cancelar" action="livro"/><br></br>
+                </h:form>
+	</p:panel>
+  </h:form> 
+</h:body> 
+</html>

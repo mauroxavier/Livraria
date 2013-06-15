@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>Trabalho Prime Faces</title>
+		</f:facet>
+	</h:head>
+
+	<h:body>
+
+
+		<div class="all" >
+
+			<p:growl id="messages"/>
+
+		<p:panel id="panel" header="Livraria Xurupita" style="margin-bottom:5px; horizontal-align:center;"> 
+			<p:menubar>
+				<p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" />
+				<p:menuitem value="Autores" url="/paginas/autor.xhtml" />
+				<p:menuitem value="Categorias" url="/paginas/categoria.xhtml" />
+				<p:menuitem value="Clientes" url="/paginas/cliente.xhtml" />
+				<p:menuitem value="Editoras" url="/paginas/editora.xhtml" />
+				<p:menuitem value="Funcionários" url="/paginas/funcionario.xhtml" />
+				<p:menuitem value="Livros" url="/paginas/livro.xhtml" />
+			</p:menubar>
+		</p:panel>
+
+		</div>
+
+	</h:body>
+
+</f:view>
+</html>

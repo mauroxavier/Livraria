@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Funcionários</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+				<ui:include src="index.xhtml"></ui:include>
+
+                <p:layoutUnit position="all">
+			
+                <h:form>
+                <p:dataTable id="dataTable" var="funcionario" value="#{MBFuncionario.consultarFuncionario}" paginator="true"  rows="6">
+        		<f:facet name="header">  
+            		Funcionários  
+        		</f:facet>  				
+        		<p:column style="width: 50;" headerText="Código">
+                	<h:outputText value="#{funcionario.id}" />
+        		</p:column>
+        		<p:column  headerText="Nome do funcionário" >
+                	<h:outputText value="#{funcionario.nome}" />
+        		</p:column>
+        		<p:column style="width: 10%;" headerText="Login">
+                	<h:outputText value="#{funcionario.login}" />
+        		</p:column>
+        		<p:column style="width: 15%;" headerText="Senha">
+                    <h:outputText value="#{funcionario.senha}" />
+        		</p:column>
+        		<p:column style="width: 10;" headerText="Operações">
+        			<p:commandButton value="Alterar" action="#{MBFuncionario.prepararAlterar()}"/>
+        			<p:column>
+                 	<p:commandButton value="Excluir" update="dataTable" action="#{MBFuncionario.excluir()}"/>
+                 </p:column>
+        		</p:column>
+        		</p:dataTable><br/>
+                 <p:commandButton id="novo" value="Novo Funcionário" update="dataTable" action="#{MBFuncionario.prepararAdd()}"/>
+                 <p:commandButton id="voltar" value="Voltar" action="index" />
+              
+                </h:form>
+                </p:layoutUnit>
+
+            
+
+        </h:body>
+
+    </f:view>
+</html>

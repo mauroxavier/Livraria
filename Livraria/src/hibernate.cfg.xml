@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0.dtd"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!-- PARTE QUE INFORMA AO XML QUE ESTAMOS USANDO O HIBERNATE 
+ TAG de configuração do Hibernate -->
+<hibernate-configuration>
+ <!-- TAG de fábrica de Sessão do hibernate. É aqui onde informamos os dados do banco,
+	as configurações da sessão e as classes Model do java que o Hibernate deverá
+	considerar.
+	-->
+ <session-factory >
+  <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+  <!-- *URL do banco, ou seja, seu caminho de acesso. -->
+  <property name="connection.url">jdbc:mysql://localhost/trabalho_prime_faces?createDatabaseIfNotExist=true</property>
+  <!-- *Usuario e senha do banco acima informado. -->
+  <property name="connection.username">root</property>
+  <property name="connection.password">00teste</property>
+  <!-- Impressão da SQL na saida padrao -->
+  <property name="show_sql">true</property>
+  <property name="format_sql">true</property>
+  <!-- Define charset para evitar erros nos acentos e acesso -->
+        <property name="hibernate.connection.CharSet">utf8</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="hibernate.connection.useUnicode">true</property>
+<!-- Configuração de validação do Banco de Dados na execução do sistema 
+ É aqui que se informa se o banco será criado pelo Hibernate (create-drop) -->
+  <property name="hbm2ddl.auto">update</property>
+  <!-- Apenas atualiza a estrutura 
+<property name="hbm2ddl.auto">create</property>
+ Cria a estrutura do banco de dados com base nos Models 
+<property name="hbm2ddl.auto">drop-create</property>
+ Apaga e cria o banco com base nas annotations 
+<property name="hbm2ddl.auto">validate</property>
+ Apenas valida a estrutura 
+ *PARTE MAIS IMPORTANTE - MUDA DE PROJETO PARA PROJETO 
+ *PARA CADA NOVA CLASSE MODEL CRIADA DEVE INFORMA-LA AQUI -->
+  <mapping class="br.com.trabalhoPrimeFaces.persistence.FuncionarioVO"/>
+  <mapping class="br.com.trabalhoPrimeFaces.persistence.AutorVO"/>
+  <mapping class="br.com.trabalhoPrimeFaces.persistence.CategoriaVO"/>
+  <mapping class="br.com.trabalhoPrimeFaces.persistence.ClienteVO"/>
+  <mapping class="br.com.trabalhoPrimeFaces.persistence.VendaVO"/>
+  <mapping class="br.com.trabalhoPrimeFaces.persistence.EditoraVO"/>
+  <mapping class="br.com.trabalhoPrimeFaces.persistence.LivroVO"/>
+ </session-factory>
+ 
+</hibernate-configuration>
