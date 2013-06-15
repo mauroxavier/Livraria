@@ -8,7 +8,7 @@
 <h:head>
 	<f:facet name="first">
 		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-		<title>Efetuar venda</title>
+		<title>Alterar venda</title>
 	</f:facet>                      
 </h:head> 
 
@@ -16,8 +16,9 @@
 
 <h:body>
   <h:form> 
-	<p:panel id="panel" header="Efetuar venda" style="margin-bottom:10px; align: center;">
+	<p:panel id="panel" header="Alterar venda" style="margin-bottom:10px; align: center;">
                 <h:form>
+                 <br></br>
     			 Funcionario<br/> <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="0"><br></br> 
 		         <p:selectOneMenu value="#{MBVenda.beanVenda.funcionario}"> 
 		         <f:selectItems value="#{MBFuncionario.getFuncionarios()}" var="funcionario" itemLabel="#{funcionario.nome}" itemValue="#{funcionario.id}" />
@@ -33,7 +34,7 @@
 		         <f:selectItems value="#{MBLivro.getLivros()}" var="livro" itemLabel="#{livro.descricao}" itemValue="#{livro.id}" />
 		         </p:selectOneMenu> </h:panelGrid><br></br>                    
 
-                 <p:commandButton id="vender" value="Vender" action="#{MBVenda.inserir()}"/>
+                 <p:commandButton id="alterar" value="Alterar" action="#{MBVenda.alterar()}"/>
                  <p:commandButton id="cancelar" value="Cancelar" action="venda"/><br></br>
                 </h:form>
 	</p:panel>

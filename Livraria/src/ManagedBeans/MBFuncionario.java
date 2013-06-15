@@ -122,6 +122,8 @@ public class MBFuncionario{
     	this.consultarFuncionario = consultarFuncionario;
     }
 	
-	
+	public String returnError( Integer id ) {
+		return daoFuncionario.returnError( id );
+	}	   
 	
 }//Fim da Classe 

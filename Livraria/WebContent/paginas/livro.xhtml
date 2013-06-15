@@ -29,7 +29,7 @@
 	</script> 
 	<f:facet name="first">
 		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-		<title>Alterar livro</title>
+		<title>Livros</title>
 	</f:facet>                      
 </h:head> 
 
@@ -67,13 +67,19 @@
         		<p:column style="width: 10;" headerText="Operações">
         			<p:commandButton value="Alterar" action="#{MBLivro.prepararAlterar()}"/>
         			<p:column>
-                 	<p:commandButton value="Excluir" update="dataTable" action="#{MBLivro.excluir()}" onclick="showMessage"/>
-					</p:column>
-        		</p:column>
+                 	<p:commandButton value="Excluir" update="dataTable" onclick="#{MBLivro.returnError(livro.id)}" action="#{MBLivro.excluir()}" />
+	                </p:column>
+                </p:column>
         		</p:dataTable><br/>
-                 <p:commandButton id="novo" value="Novo Livro" update="dataTable" action="#{MBLivro.prepararAdd()}"/>
+                 <p:commandButton id="novo" value="Novo Livro" update="dataTable" action="#{MBLivro.prepararAdd()}" />
                  <p:commandButton id="voltar" value="Voltar" action="index" />
-              
+                 
+    					<p:growl id="messages" sticky="true" showDetail="true"/>  
+       					<p:confirmDialog id="confirmDialog" message="Uma venda foi efetuada com este livro. Não é possível removê-lo."  
+       									widgetVar="message" header="Erro" width="425"  severity="alert"
+        								resizable="false" showEffect="clip" hideEffect="clip">  
+		    			</p:confirmDialog>
+
                 </h:form>
                 </p:layoutUnit>
         </h:body>

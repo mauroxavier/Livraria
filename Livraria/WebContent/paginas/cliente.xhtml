@@ -43,13 +43,19 @@
         		<p:column style="width: 5;" headerText="Operações">
         			<p:commandButton value="Alterar" action="#{MBCliente.prepararAlterar()}"/>
         			<p:column>
-                 	<p:commandButton value="Excluir" update="dataTable" action="#{MBCliente.excluir()}"/>
-                 </p:column>
-        		</p:column>
+                     	<p:commandButton value="Excluir" update="dataTable" onclick="#{MBCliente.returnError(cliente.id)}" action="#{MBCliente.excluir()}" />
+	                </p:column>
+                </p:column>
         		</p:dataTable><br/>
-                 <p:commandButton id="novo" value="Novo Cliente" update="dataTable" action="#{MBCliente.prepararAdd()}"/>
+                 <p:commandButton id="novo" value="Novo Cliente" update="dataTable" action="#{MBCliente.prepararAdd()}" />
                  <p:commandButton id="voltar" value="Voltar" action="index" />
                  
+    					<p:growl id="messages" sticky="true" showDetail="true"/>  
+       					<p:confirmDialog id="confirmDialog" message="Uma venda foi efetuada para este cliente. Não é possível removê-lo."  
+       									widgetVar="message" header="Erro" width="425"  severity="alert"
+        								resizable="false" showEffect="clip" hideEffect="clip">  
+		    			</p:confirmDialog>
+
                 </h:form>
                 </p:layoutUnit>
         </h:body>

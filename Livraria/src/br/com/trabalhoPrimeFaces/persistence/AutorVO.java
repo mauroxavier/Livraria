@@ -35,10 +35,10 @@ public final class AutorVO implements Serializable{
 	@Column
 	private Integer id;
 	
-	@Column
+	@Column (name="nome")
 	private String nome;
 	
-	@Column
+	@Column (name="descricao")
 	private String descricao;
 	
 	

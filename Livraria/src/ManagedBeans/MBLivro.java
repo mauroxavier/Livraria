@@ -80,6 +80,11 @@ public final class MBLivro{
 		LivroVO livro = daoLivro.consultarPorId( id );
 		return livro.getDescricao();
 	}
+
+	public Float preco(int id){
+		LivroVO livro = daoLivro.consultarPorId( id );
+		return livro.getPreco();
+	}	
 	
 	/**
      * Método responsável por retornar o valor do atributo beanLivro.
@@ -121,5 +126,8 @@ public final class MBLivro{
     	this.consultarLivro = consultarLivro;
     }
 	
+	public String returnError( Integer id ) {
+		return daoLivro.returnError( id );
+	}	   
 	
 }//Fim da Classe

@@ -1,17 +1,21 @@
 package br.com.trabalhoPrimeFaces.persistence;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import ManagedBeans.MBCliente;
+import ManagedBeans.MBFuncionario;
+import ManagedBeans.MBLivro;
 
 /**
  * 
@@ -37,18 +41,18 @@ public final class VendaVO implements Serializable{
     @Column(name = "id")
     private Integer id;
 	
-	@Column(name = "data")
+	@Column(name = "data", nullable = false)
 	private Date data;
 	
-	@Column(name ="funcionario_id")
-	private FuncionarioVO funcionario;
+	@JoinColumn(name = "funcionario", referencedColumnName="id")
+	public Integer funcionario;
 	
-	@Column(name = "cliente_id")
-	private ClienteVO cliente;
+	@JoinColumn(name = "cliente", referencedColumnName="id")
+	public Integer cliente;
 	
-	@Transient
-	private String variavelGlobalAuxiliar;
-
+	@JoinColumn(name = "livro", referencedColumnName="id")
+	public Integer livro;
+	
     public final Integer getId() {
     	return id;
     }
@@ -65,37 +69,99 @@ public final class VendaVO implements Serializable{
     	this.data = data;
     }
 
-    public final FuncionarioVO getFuncionario() {
+    public final void setToday() {
+    	Date today = new Date();
+    	this.data = today;
+    }
+    
+    public final Integer getFuncionario() {
     	return funcionario;
     }
 
-    public final void setFuncionario( FuncionarioVO funcionario ) {
+    public final void setFuncionario( Integer funcionario ) {
     	this.funcionario = funcionario;
     }
 
-    public final ClienteVO getCliente() {
+    public final Integer getCliente() {
     	return cliente;
     }
 
-    public final void setCliente( ClienteVO cliente ) {
+    public final void setCliente( Integer cliente ) {
     	this.cliente = cliente;
     }
-
-    public final String getVariavelGlobalAuxiliar() {
-    	return variavelGlobalAuxiliar;
+    
+    public final Integer getLivro() {
+    	return livro;
     }
 
-    public final void setVariavelGlobalAuxiliar( String variavelGlobalAuxiliar ) {
-    	this.variavelGlobalAuxiliar = variavelGlobalAuxiliar;
+    public final void setLivro( Integer livro ) {
+    	this.livro = livro;
     }
 
-	public VendaVO( Integer id, Date data, FuncionarioVO funcionario, ClienteVO cliente, String variavelGlobalAuxiliar ){
+	/**
+	 * Retorna nome do funcionario vinculado a venda
+	 * @autor Mauro Xavier
+	 * @since 09/06/2013
+	 */	
+	public final String getFuncionarioString() {
+		MBFuncionario cFuncionario = new MBFuncionario();
+		if (cFuncionario.nome(funcionario) == null) 
+			return " ";
+		else
+			return cFuncionario.nome(funcionario);
+	}
+	
+	/**
+	 * Retorna nome do cliente vinculado a venda
+	 * @autor Mauro Xavier
+	 * @since 09/06/2013
+	 */	
+	public final String getClienteString() {
+		MBCliente cCliente = new MBCliente();
+		if (cCliente.nome(cliente) == null) 
+			return " ";
+		else
+			return cCliente.nome(cliente);
+	}	
+	
+	/**
+	 * Retorna nome do livro vinculado a venda
+	 * @autor Mauro Xavier
+	 * @since 09/06/2013
+	 */	
+	public final String getLivroString() {
+		MBLivro cLivro = new MBLivro();
+		if (cLivro.descricao(livro) == null) 
+			return " ";
+		else
+			return cLivro.descricao(livro);
+	}	
+
+	/**
+	 * Retorna nome preço do livro vinculado a venda
+	 * @autor Mauro Xavier
+	 * @since 09/06/2013
+	 */	
+	public final Float getPreco() {
+		MBLivro cLivro = new MBLivro();
+		if (cLivro.preco(livro) == null) 
+			return (float) 0.0;
+		else
+			return cLivro.preco(livro);
+	}	
+	
+	@Override
+    public String toString() {
+	    return "VendaVO [id=" + id + ", data=" + data + ", funcionario=" + funcionario + ", cliente=" + cliente + ", livro=" + livro + "]";
+    }
+
+	public VendaVO( Integer id, Date data, Integer funcionario, Integer cliente, Integer livro ){
 	    super();
 	    this.id = id;
 	    this.data = data;
 	    this.funcionario = funcionario;
 	    this.cliente = cliente;
-	    this.variavelGlobalAuxiliar = variavelGlobalAuxiliar;
+	    this.livro = livro;
     }
 
 	public VendaVO(){
@@ -104,7 +170,7 @@ public final class VendaVO implements Serializable{
 	    setData(data);
 	    setFuncionario(funcionario);
 	    setCliente(cliente);
-	    setVariavelGlobalAuxiliar(variavelGlobalAuxiliar);
+	    setLivro(livro);
     }
 
 	/**
@@ -118,8 +184,8 @@ public final class VendaVO implements Serializable{
 	    result = prime * result + ( ( cliente == null ) ? 0 : cliente.hashCode() );
 	    result = prime * result + ( ( data == null ) ? 0 : data.hashCode() );
 	    result = prime * result + ( ( funcionario == null ) ? 0 : funcionario.hashCode() );
+	    result = prime * result + ( ( livro == null ) ? 0 : livro.hashCode() );
 	    result = prime * result + ( ( id == null ) ? 0 : id.hashCode() );
-	    result = prime * result + ( ( variavelGlobalAuxiliar == null ) ? 0 : variavelGlobalAuxiliar.hashCode() );
 	    return result;
     }
 
@@ -156,26 +222,13 @@ public final class VendaVO implements Serializable{
 			    return false;
 	    } else if ( !id.equals( other.id ) )
 		    return false;
-	    if ( variavelGlobalAuxiliar == null ) {
-		    if ( other.variavelGlobalAuxiliar != null )
+	    if ( livro == null ) {
+		    if ( other.livro != null )
 			    return false;
-	    } else if ( !variavelGlobalAuxiliar.equals( other.variavelGlobalAuxiliar ) )
+	    } else if ( !livro.equals( other.livro ) )
 		    return false;
+	    
 	    return true;
     }
 
-	/**
-     * Polimorfico
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-	    return "VendaVO [id=" + id + ", data=" + data + ", funcionario=" + funcionario + ", cliente=" + cliente + ", variavelGlobalAuxiliar=" + variavelGlobalAuxiliar + "]";
-    }
-
-	@Transient
-	public Integer getNumeroAuxiliar() {
-		return new Integer( 200 );
-	}
-	
 }//Fim da Classe

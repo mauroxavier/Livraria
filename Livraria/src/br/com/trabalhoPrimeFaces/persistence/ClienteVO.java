@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  * 
@@ -50,14 +49,6 @@ public final class ClienteVO implements Serializable{
 	@Column
 	String estado;
 	
-	/**
-	 * @Transient - Informa que a vari�vel em quest�o n�o dever� ser levada em conta pelo
-	 *            Hibernate, ou seja, n�o ser� tratada como um atributo e com isso o hibernate saber�
-	 *            que ela n�o possui uma coluna no banco de dados relacionado a ela.
-	 */
-	@Transient
-	private String variavelGlobalAuxiliar;
-
 	public final Integer getId() {
     	return id;
     }
@@ -186,15 +177,5 @@ public final class ClienteVO implements Serializable{
 	    setCidade( cidade );
 	    setEstado( estado );
     }
-	
-	/**
-	 * @Transient - Informa que a vari�vel em quest�o n�o dever� ser levada em conta pelo
-	 *            Hibernate, ou seja, n�o ser� tratada como um atributo e com isso o hibernate saber�
-	 *            que ela n�o possui uma coluna no banco de dados relacionado a ela.
-	 */
-	@Transient
-	public Integer getNumeroAuxiliar() {
-		return new Integer( 200 );
-	}
 	
 }//Fim da Classe

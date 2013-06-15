@@ -37,13 +37,19 @@
         		<p:column style="width: 10;" headerText="Operações">
         			<p:commandButton value="Alterar" action="#{MBFuncionario.prepararAlterar()}"/>
         			<p:column>
-                 	<p:commandButton value="Excluir" update="dataTable" action="#{MBFuncionario.excluir()}"/>
-                 </p:column>
-        		</p:column>
+                 	<p:commandButton value="Excluir" update="dataTable" onclick="#{MBFuncionario.returnError(funcionario.id)}" action="#{MBFuncionario.excluir()}" />
+	                </p:column>
+                </p:column>
         		</p:dataTable><br/>
-                 <p:commandButton id="novo" value="Novo Funcionário" update="dataTable" action="#{MBFuncionario.prepararAdd()}"/>
+                 <p:commandButton id="novo" value="Novo Funcionario" update="dataTable" action="#{MBFuncionario.prepararAdd()}" />
                  <p:commandButton id="voltar" value="Voltar" action="index" />
-              
+                 
+    					<p:growl id="messages" sticky="true" showDetail="true"/>  
+       					<p:confirmDialog id="confirmDialog" message="Uma venda foi efetuada com este funcionário. Não é possível removê-lo."  
+       									widgetVar="message" header="Erro" width="425"  severity="alert"
+        								resizable="false" showEffect="clip" hideEffect="clip">  
+		    			</p:confirmDialog>
+
                 </h:form>
                 </p:layoutUnit>
 

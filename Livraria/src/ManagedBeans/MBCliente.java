@@ -130,4 +130,9 @@ public final class MBCliente{
     	this.consultarCliente = consultarCliente;
     }
     
+	public String returnError( Integer id ) {
+		return daoCliente.returnError( id );
+	}	   
+    
+    
 }//Fim da Classe

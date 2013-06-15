@@ -47,6 +47,7 @@ public class VendaDAO extends AbstractDAO{
 			// Confirma a ação executada e fecha a Transação.
 			transacao.commit();
 		} catch ( Exception e ) {
+			e.printStackTrace();
 			/*Caso ocorra algum erro no processo, se a transação tiver sido criada, será
 			efetuado um Rollback na mesma.*/
 			if ( transacao != null ) {
@@ -218,7 +219,7 @@ public class VendaDAO extends AbstractDAO{
 			sessao = getSessaoAberta();
 
 			// Crimando uma HQL(Hibernate Qury Language) como se estivessemos criando uma NamedQuery
-			final String HQL = "SELECT autor FROM AutorVO autor ORDER BY autor.nome.ASC";
+			final String HQL = "SELECT venda FROM VendaVO venda ORDER BY venda.data";
 
 			/*Criando e inicializando uma variavel responsável por criar uma Query
 			com base na nossa HQL criada acima deixando-a preparada para o 

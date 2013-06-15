@@ -29,19 +29,18 @@ public final class MBVenda{
 	
 	private VendaVO beanVenda;
 	private VendaDAO daoVenda;
-	
-	
+		
 	@SuppressWarnings("rawtypes")
 	private DataModel consultarVenda;
 	
-	public MBVenda(){
-	    
+	public MBVenda(){	    
 		beanVenda = new VendaVO();
 		daoVenda = new VendaDAO();
     }// Fim do construtor
 	
 	public String prepararAdd() {
 		beanVenda = new VendaVO();
+		beanVenda.setToday();
 		return "addVenda";
 	}
 
@@ -57,6 +56,11 @@ public final class MBVenda{
 		return consultarVenda;
 	}
 
+	public ArrayList <VendaVO> getVendas() {
+		ArrayList< VendaVO > listaVenda = new VendaDAO().consultarTodos();		
+		return listaVenda;
+	}
+	
 	public String prepararAlterar() {
 		beanVenda = (VendaVO) ( consultarVenda.getRowData() );
 		return "alterarVenda";
@@ -71,6 +75,26 @@ public final class MBVenda{
 		beanVenda = (VendaVO) (consultarVenda.getRowData() );
 		daoVenda.excluir( beanVenda );
 		return "venda";
+	}
+	
+	public Integer funcionario(int id){
+		VendaVO venda = daoVenda.consultarPorId( id );
+		return venda.getFuncionario();
+	}
+
+	public Integer cliente(int id){
+		VendaVO venda = daoVenda.consultarPorId( id );
+		return venda.getCliente();
+	}
+
+	public Integer livro(int id){
+		VendaVO venda = daoVenda.consultarPorId( id );
+		return venda.getLivro();
+	}
+
+	public Float preco(int id){
+		VendaVO venda = daoVenda.consultarPorId( id );
+		return venda.getPreco();
 	}
 	
 	/**

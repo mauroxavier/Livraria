@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import ManagedBeans.MBAutor;
 import ManagedBeans.MBCategoria;
@@ -55,14 +54,6 @@ public final class LivroVO implements Serializable{
 	private Integer editora;
 		
 
-	/**
-	 * @Transient - Informa que a vari�vel em quest�o n�o dever� ser levada em conta pelo
-	 *            Hibernate, ou seja, n�o ser� tratada como um atributo e com isso o hibernate saber�
-	 *            que ela n�o possui uma coluna no banco de dados relacionado a ela.
-	 */
-	@Transient
-	private String variavelGlobalAuxiliar;
-	
 	public final Integer getId() {
 		return id;
 	}
@@ -211,15 +202,6 @@ public final class LivroVO implements Serializable{
 		return "LivroVO [id=" + id + ", descricao=" + descricao + ", preco=" + preco + ", autor=" + autor + ", categoria=" + categoria + ", editora=" + editora + "]";
 	}
 
-	/**
-	 * 
-	 * M�todo padr�o do Hibernate
-	 * 
-	 * 
-	 * @author Augusto C�sar
-	 * @since 14/05/2013 13:58:42
-	 * @version 1.0
-	 */
 	public LivroVO(){
 		super();
 		setId( id );
@@ -240,13 +222,4 @@ public final class LivroVO implements Serializable{
 		this.editora = editora;
 	}
 
-	/**
-	 * @Transient - Informa que a vari�vel em quest�o n�o dever� ser levada em conta pelo
-	 *            Hibernate, ou seja, n�o ser� tratada como um atributo e com isso o hibernate saber�
-	 *            que ela n�o possui uma coluna no banco de dados relacionado a ela.
-	 */
-	@Transient
-	public Integer getNumeroAuxiliar() {
-		return new Integer( 200 );
-	}
 }//Fim da Classe
